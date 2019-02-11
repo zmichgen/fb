@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { ProgressBar } from './progressBar';
 import { Message } from './message';
-import { fb } from './firebase.service';
+// import { fb } from './firebase.service';
 
 import logo from './logo.svg';
 import './App.css';
@@ -18,10 +18,10 @@ class App extends Component {
           descr: 'description...',
           done: false,
           attachments: [
-            { name: 'attached file 1', url: 'url/to/the/file.txt' }
-          ]
-        }
-      ]
+            { name: 'attached file 1', url: 'url/to/the/file.txt' },
+          ],
+        },
+      ],
     };
   }
 
@@ -36,10 +36,10 @@ class App extends Component {
   deleteAttachment() {}
 
   login = () => {
-    fb.login().then(({ user }) => {
-      this.setState({ user });
-    });
-  }
+    // fb.login().then(({ user }) => {
+    //   this.setState({ user });
+    // });
+  };
 
   logout() {}
 
@@ -49,38 +49,61 @@ class App extends Component {
     return (
       <React.Fragment>
         {message && <Message message={message} />}
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <section className="login__wrapper">
+        <div className='App'>
+          <header className='App-header'>
+            <img src={logo} className='App-logo' alt='logo' />
+            <section className='login__wrapper'>
               {user && <img src={user.photoURL} alt='avatar' />}
               {user && <p>{user.displayName}</p>}
-              {user
-                ? <button onClick={this.logout}>Logout</button>
-                : <button onClick={this.login}>Login</button>
-              }
+              {user ? (
+                <button onClick={this.logout}>Logout</button>
+              ) : (
+                <button onClick={this.login}>Login</button>
+              )}
             </section>
           </header>
-          <button className="back-up" onClick={this.backupTodos}>Backup Todos</button>
+          <button className='back-up' onClick={this.backupTodos}>
+            Backup Todos
+          </button>
           <main>
-          {this.state.todos.map((todo, i) => (
-              <article key={`todo${i}`} className={`todo__wrapper todo__wrapper--${todo.done ? 'done' : 'not-done'}`}>
+            {this.state.todos.map((todo, i) => (
+              <article
+                key={`todo${i}`}
+                className={`todo__wrapper todo__wrapper--${
+                  todo.done ? 'done' : 'not-done'
+                }`}
+              >
                 <h2>{todo.header}</h2>
                 <p>{todo.descr}</p>
-                <input type="file" onChange={this.uploadAttachment(i)} />
-                {todo.progress ? <ProgressBar progress={todo.progress} /> : null}
+                <input type='file' onChange={this.uploadAttachment(i)} />
+                {todo.progress ? (
+                  <ProgressBar progress={todo.progress} />
+                ) : null}
                 <h3>Attachments</h3>
-                {todo.attachments.length
-                  ? <div className="todo__attachments">
-                    {todo.attachments.map((file, ind) =>
+                {todo.attachments.length ? (
+                  <div className='todo__attachments'>
+                    {todo.attachments.map((file, ind) => (
                       <div key={`key_${ind}`}>
-                        <a href={file.url} target="_blank" rel="noopener noreferrer">{file.name}</a>
-                        <button onClick={this.deleteAttachment(i, ind)}>-</button>
+                        <a
+                          href={file.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                        >
+                          {file.name}
+                        </a>
+                        <button onClick={this.deleteAttachment(i, ind)}>
+                          -
+                        </button>
                       </div>
-                    )}
-                  </div> : null
-                }
-                <button className="todo__done-button" onClick={this.toggleDone(i)}>Toggle Done</button>
+                    ))}
+                  </div>
+                ) : null}
+                <button
+                  className='todo__done-button'
+                  onClick={this.toggleDone(i)}
+                >
+                  Toggle Done
+                </button>
               </article>
             ))}
           </main>
