@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { ProgressBar } from './progressBar';
 import { Message } from './message';
-// import { fb } from './firebase.service';
+import { fb } from './firebase.service';
 
 import logo from './logo.svg';
 import './App.css';
@@ -36,9 +36,9 @@ class App extends Component {
   deleteAttachment() {}
 
   login = () => {
-    // fb.login().then(({ user }) => {
-    //   this.setState({ user });
-    // });
+    fb.login().then(({ user }) => {
+      this.setState({ user });
+    });
   };
 
   logout() {}

@@ -1,12 +1,12 @@
-import firebase from "firebase";
+import firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyCW8v55QC9FqIgrVsACCoS2sdw_GSFXYw0",
-  authDomain: "fir-task-c37ed.firebaseapp.com",
-  databaseURL: "https://fir-task-c37ed.firebaseio.com",
-  projectId: "fir-task-c37ed",
-  storageBucket: "fir-task-c37ed.appspot.com",
-  messagingSenderId: "1030570304835"
+  apiKey: 'AIzaSyC7Q4AuWaK1MUAl8msyPzcn5dJcmlbE1XU',
+  authDomain: 'template-31fbe.firebaseapp.com',
+  databaseURL: 'https://template-31fbe.firebaseio.com',
+  projectId: 'template-31fbe',
+  storageBucket: '',
+  messagingSenderId: '784408908854',
 };
 const fire = firebase.initializeApp(config);
 
@@ -14,5 +14,5 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 export const fb = {
-  login: () => fire.auth().signInWithPopup(provider)
+  login: () => fire.auth().signInWithPopup(provider),
 };
