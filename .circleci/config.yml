@@ -97,7 +97,7 @@ workflows:
           requires:
             - save_cache
       - deploy:
-          context: firebase-task
+          context: fb
           requires:
             - build
             - test
